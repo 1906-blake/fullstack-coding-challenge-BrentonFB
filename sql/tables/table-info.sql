@@ -4,6 +4,7 @@ CREATE TABLE grocery_list (
 );
 
 CREATE TABLE grocery_items (
+	ITEM_ID SERIAL PRIMARY KEY NOT NULL,
 	list_id INTEGER REFERENCES grocery_list(list_id),
 	item_name TEXT NOT NULL,
     amount INTEGER NOT NULL,

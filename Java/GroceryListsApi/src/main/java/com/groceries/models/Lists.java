@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "grocery_list")
-public class List {
+public class Lists {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "list_id")
@@ -17,16 +17,34 @@ public class List {
 	
 	@Column(name="name")
 	private String listName;
+
+	public int getListId() {
+		return listId;
+	}
+
+	public void setListId(int listId) {
+		this.listId = listId;
+	}
+
+	public String getListName() {
+		return listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
 	
-	public List(int listId, String listName) {
+	public Lists() {
 		super();
 		this.listId = listId;
 		this.listName = listName;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "List [listId=" + listId + ", listName=" + listName + "]";
+		return "Lists [listId=" + listId + ", listName=" + listName + "]";
 	}
 
 	@Override
@@ -46,7 +64,7 @@ public class List {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		List other = (List) obj;
+		Lists other = (Lists) obj;
 		if (listId != other.listId)
 			return false;
 		if (listName == null) {
@@ -56,20 +74,7 @@ public class List {
 			return false;
 		return true;
 	}
-
-	public int getListId() {
-		return listId;
-	}
-
-	public void setListId(int listId) {
-		this.listId = listId;
-	}
-
-	public String getListName() {
-		return listName;
-	}
-
-	public void setListName(String listName) {
-		this.listName = listName;
-	}
+	
+	
+	
 }

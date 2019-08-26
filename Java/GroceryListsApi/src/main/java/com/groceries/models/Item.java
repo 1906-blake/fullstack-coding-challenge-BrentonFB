@@ -2,6 +2,9 @@ package com.groceries.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -9,9 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "grocery_items")
 public class Item {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "item_id")
+	private int itemId;
+	
 	@OneToOne
 	@JoinColumn(name = "list_id")
-	private int listId;
+	private Lists listId;
 	
 	@Column(name = "item_name")
 	private String itemName;
@@ -21,11 +29,19 @@ public class Item {
 	@Column(name = "item_type")
 	private String itemType;
 
-	public int getListId() {
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	public Lists getListId() {
 		return listId;
 	}
 
-	public void setListId(int listId) {
+	public void setListId(Lists listId) {
 		this.listId = listId;
 	}
 
@@ -53,8 +69,9 @@ public class Item {
 		this.itemType = itemType;
 	}
 
-	public Item(int listId, String itemName, int amount, String itemType) {
+	public Item(int itemId, Lists listId, String itemName, int amount, String itemType) {
 		super();
+		this.itemId = itemId;
 		this.listId = listId;
 		this.itemName = itemName;
 		this.amount = amount;
@@ -63,8 +80,8 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Item [listId=" + listId + ", itemName=" + itemName + ", amount=" + amount + ", itemType=" + itemType
-				+ "]";
+		return "Item [itemId=" + itemId + ", listId=" + listId + ", itemName=" + itemName + ", amount=" + amount
+				+ ", itemType=" + itemType + "]";
 	}
 
 	@Override
@@ -72,9 +89,10 @@ public class Item {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
+		result = prime * result + itemId;
 		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
 		result = prime * result + ((itemType == null) ? 0 : itemType.hashCode());
-		result = prime * result + listId;
+		result = prime * result + ((listId == null) ? 0 : listId.hashCode());
 		return result;
 	}
 
@@ -89,6 +107,8 @@ public class Item {
 		Item other = (Item) obj;
 		if (amount != other.amount)
 			return false;
+		if (itemId != other.itemId)
+			return false;
 		if (itemName == null) {
 			if (other.itemName != null)
 				return false;
@@ -99,12 +119,13 @@ public class Item {
 				return false;
 		} else if (!itemType.equals(other.itemType))
 			return false;
-		if (listId != other.listId)
+		if (listId == null) {
+			if (other.listId != null)
+				return false;
+		} else if (!listId.equals(other.listId))
 			return false;
 		return true;
 	}
-	
-	
-	
 
+	
 }
