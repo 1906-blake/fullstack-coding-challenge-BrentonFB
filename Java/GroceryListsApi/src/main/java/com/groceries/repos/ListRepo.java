@@ -10,4 +10,6 @@ public interface ListRepo extends JpaRepository<Lists, Integer> {
 
 	public List<Lists> findAll();
 
+	public Lists save(Lists lists);
+
 }

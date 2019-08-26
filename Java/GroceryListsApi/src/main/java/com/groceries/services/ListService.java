@@ -18,4 +18,19 @@ public class ListService {
 		return listRepo.findAll();
 	}
 
+	public Lists save(Lists lists) {
+		lists.setListId(0);
+		return listRepo.saveAndFlush(lists);
+	}
+
+	public Lists deleteById(int id) {
+		if(listRepo.getOne(id) != null) {			
+			Lists checkerList = listRepo.getOne(id);
+			if(checkerList.getListId() == id) {			
+				listRepo.deleteById(id);
+			}
+		}
+		return null;
+	}
+
 }

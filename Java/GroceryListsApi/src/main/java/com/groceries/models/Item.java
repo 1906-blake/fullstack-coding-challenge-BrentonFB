@@ -69,7 +69,7 @@ public class Item {
 		this.itemType = itemType;
 	}
 
-	public Item(int itemId, Lists listId, String itemName, int amount, String itemType) {
+	public Item() {
 		super();
 		this.itemId = itemId;
 		this.listId = listId;
