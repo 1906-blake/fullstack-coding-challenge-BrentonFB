@@ -3,13 +3,9 @@ CREATE TABLE grocery_list (
 	name TEXT NOT NULL
 );
 
-CREATE TABLE grocery_types (
-	type TEXT NOT NULL PRIMARY KEY
-);
-
 CREATE TABLE grocery_items (
 	list_id INTEGER REFERENCES grocery_list(list_id),
 	item_name TEXT NOT NULL,
     amount INTEGER NOT NULL,
-	item_type TEXT NOT NULL REFERENCES grocery_types(type)
+	item_type TEXT NOT NULL
 );
