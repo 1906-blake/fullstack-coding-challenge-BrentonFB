@@ -17,6 +17,10 @@ public class ListService {
 	public List<Lists> findAll() {
 		return listRepo.findAll();
 	}
+	
+//	public Lists findById(int id) {
+//		return listRepo.findById(id);
+//	}
 
 	public Lists save(Lists lists) {
 		lists.setListId(0);
